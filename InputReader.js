@@ -8,7 +8,6 @@ class InputReader {
     _readLineInterface = null;
     constructor() {
         this._readLineInterface = readline.createInterface({input, output});
-        
     }
     listenInput(game) {
         this._readLineInterface.on('line', (data) => {

@@ -1,13 +1,15 @@
-class Snake {
+class GameObject {
     _pattern = '@';
     _prevm = 0;
     _prevn = 0;
     position = 0;
-    
+    _moves = ['moveRight','moveDown', 'moveLeft', 'moveUp'];
     constructor(
-        position
+        position,
+        pattern
     ) {
         this.position = position;
+        this._pattern = pattern;
     }
     
     get m() {
@@ -57,7 +59,10 @@ class Snake {
             default:
         }
     }
-    
+    makeRandomMove() {
+        let move = this._moves[Math.floor(Math.random()*this._moves.length)];
+        this.makeAMove(move);
+    }
 }
 
-module.exports = Snake;
+module.exports = GameObject;
