@@ -1,30 +1,31 @@
 class Grid {
     _object = null;
     _grid = [
-        ['O', 'O', 'O'],
-        ['O', 'O', 'O'],
-        ['O', 'O', 'O']
+        ['🟩', '🟩', '🟩'],
+        ['🟩', '🟩', '🟩'],
+        ['🟩', '🟩', '🟩']
     ];
     currentPositions = [];
     constructor(objects) {
         this.objects = objects;
     }
-    refreshGrid() {
+    reset() {
         for(let [index,object] of this.objects.entries()) {
             if(this._grid[object._prevm][object._prevn] === object.pattern)
-                this._grid[object._prevm][object._prevn] = 'O';
+                this._grid[object._prevm][object._prevn] = '🟩';
             this._grid[object.m][object.n] = object.pattern;
             this.currentPositions[index] = `${object.m}${object.n}`;
         }
         // console.log(this.currentPositions[0], this.currentPositions[1]);
     }
-    displayGrid() {
+    display() {
 
         console.log(`
-            ${this._grid[0][0]}  ${this._grid[0][1]}  ${this._grid[0][2]}
-            ${this._grid[1][0]}  ${this._grid[1][1]}  ${this._grid[1][2]}
-            ${this._grid[2][0]}  ${this._grid[2][1]}  ${this._grid[2][2]}
+            ${this._grid[0][0]}   ${this._grid[0][1]}   ${this._grid[0][2]}
+            ${this._grid[1][0]}   ${this._grid[1][1]}   ${this._grid[1][2]}
+            ${this._grid[2][0]}   ${this._grid[2][1]}   ${this._grid[2][2]}
         `);
+        
     }
     getTotalArea() {
         return this._grid.length;

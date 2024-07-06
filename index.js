@@ -10,11 +10,12 @@ const objectPosition = new Position();
 const targetPosition = new Position();
 const inputReader = new InputReader();
 const userInput = new UserInput();
-const cell = new GameObject(objectPosition, '@');
-const target = new GameObject(targetPosition, '*');
+const cell = new GameObject(objectPosition, '🐇');
+const target = new GameObject(targetPosition, '🥕');
 const grid = new Grid([target, cell]);
 const Game = require('./Game');
 const game = new Game(inputReader, userInput, cell, target, grid);
+game.start();
 inputReader.listenInput(game);
 
 

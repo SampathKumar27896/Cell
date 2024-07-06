@@ -1,15 +1,31 @@
 class Game {
     inputReader = null;
     userInput = null;
-    object = null;
-    target = null;
+    rabbit = null;
+    carrot = null;
     score = 0;
+    _interval = null;
     constructor(inputReader, userInput, object, target, grid) {
-        this.inputReader = inputReader;
+        this.keyboard = inputReader;
         this.userInput = userInput;
-        this.object = object;
-        this.target = target;
-        this.grid = grid;
+        this.rabbit = object;
+        this.carrot = target;
+        this.field = grid;
+    }
+    start() {
+        console.log(`
+            Welcome to the Game. You are a hungry rabbit chasing carrots!.
+            Press:
+            'a' to move left
+            'w' to move up
+            'd' to move right
+            's' to move down
+            'c' to quite game
+            to chase the carrots in the field
+        `);
+        this.rabbit.makeRandomMove();
+        this.carrot.makeRandomMove();
+        this.refreshField();
     }
     load(rawInput) {
         this.userInput.input = rawInput;
@@ -17,24 +33,28 @@ class Game {
             this.endGame();
             return;
         }
-        console.log(`Your score: ${this.score}, Enter your input.`);
+        console.log(`=======================\n`);
         let direction = this.userInput.getDirection(this.userInput.input);
-        this.object.makeAMove(direction);
-        // this.target.makeAMove();
-        if(this.isObjectSameAsTarget()) {
+        this.rabbit.makeAMove(direction);
+        if(this.isRabbitSameAsCarrot()) {
             this.score++;
-            this.target.makeRandomMove();
+            this.carrot.makeRandomMove();
         }
-        this.grid.refreshGrid();
-        this.grid.displayGrid();
+        this.refreshField();
+        console.log(`=======================\nScore 🥕: ${this.score}, Enter your input.`);
     }
     endGame() {
-        console.log("Thankyou for playing!...");
-        this.inputReader.close();
+        console.log(`That was a great chase, You have ${this.score} 🥕`);
+        this.keyboard.close();
     }
 
-    isObjectSameAsTarget() {
-        return this.object.m === this.target.m && this.object.n === this.target.n;
+    isRabbitSameAsCarrot() {
+        return this.rabbit.m === this.carrot.m && this.rabbit.n === this.carrot.n;
+    }
+
+    refreshField() {
+        this.field.reset();
+        this.field.display();
     }
 }
 
