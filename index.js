@@ -2,17 +2,19 @@
 const InputReader = require('./InputReader');
 const UserInput = require('./UserInput');
 const Position = require('./Position');
-const Snake = require('./Snake');
+const GameObject = require('./core/GameObject');
 const Grid = require('./Grid');
 
 
-const position = new Position();
+const objectPosition = new Position();
+const targetPosition = new Position();
 const inputReader = new InputReader();
 const userInput = new UserInput();
-const snake = new Snake(position);
-const grid = new Grid(snake);
+const cell = new GameObject(objectPosition, '@');
+const target = new GameObject(targetPosition, '*');
+const grid = new Grid([target, cell]);
 const Game = require('./Game');
-const game = new Game(inputReader, userInput, snake, grid);
+const game = new Game(inputReader, userInput, cell, target, grid);
 inputReader.listenInput(game);
 
 

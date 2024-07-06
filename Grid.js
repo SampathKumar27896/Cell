@@ -5,13 +5,21 @@ class Grid {
         ['O', 'O', 'O'],
         ['O', 'O', 'O']
     ];
-    constructor(object) {
-        this.object = object;
+    currentPositions = [];
+    constructor(objects) {
+        this.objects = objects;
+    }
+    refreshGrid() {
+        for(let [index,object] of this.objects.entries()) {
+            if(this._grid[object._prevm][object._prevn] === object.pattern)
+                this._grid[object._prevm][object._prevn] = 'O';
+            this._grid[object.m][object.n] = object.pattern;
+            this.currentPositions[index] = `${object.m}${object.n}`;
+        }
+        // console.log(this.currentPositions[0], this.currentPositions[1]);
     }
     displayGrid() {
-        // console.log(prevPosition, currentPosition)
-        this._grid[this.object._prevm][this.object._prevn] = 'O';
-        this._grid[this.object.m][this.object.n] = this.object.pattern;
+
         console.log(`
             ${this._grid[0][0]}  ${this._grid[0][1]}  ${this._grid[0][2]}
             ${this._grid[1][0]}  ${this._grid[1][1]}  ${this._grid[1][2]}

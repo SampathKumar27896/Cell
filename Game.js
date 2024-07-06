@@ -1,22 +1,14 @@
-const Grid  = require('./Grid');
-const Snake = require('./Snake');
-const Position = require('./Position');
-
-
-const position = new Position();
-const grid = new Grid();
-
-
-//const snake = new Snake(userInput, position);
-
 class Game {
     inputReader = null;
     userInput = null;
-    snake = null;
-    constructor(inputReader, userInput, snake, grid) {
+    object = null;
+    target = null;
+    score = 0;
+    constructor(inputReader, userInput, object, target, grid) {
         this.inputReader = inputReader;
         this.userInput = userInput;
-        this.snake = snake;
+        this.object = object;
+        this.target = target;
         this.grid = grid;
     }
     load(rawInput) {
@@ -25,14 +17,24 @@ class Game {
             this.endGame();
             return;
         }
-        console.log("Enter your Input: ");
+        console.log(`Your score: ${this.score}, Enter your input.`);
         let direction = this.userInput.getDirection(this.userInput.input);
-        this.snake.makeAMove(direction);
+        this.object.makeAMove(direction);
+        // this.target.makeAMove();
+        if(this.isObjectSameAsTarget()) {
+            this.score++;
+            this.target.makeRandomMove();
+        }
+        this.grid.refreshGrid();
         this.grid.displayGrid();
     }
     endGame() {
         console.log("Thankyou for playing!...");
         this.inputReader.close();
+    }
+
+    isObjectSameAsTarget() {
+        return this.object.m === this.target.m && this.object.n === this.target.n;
     }
 }
 
