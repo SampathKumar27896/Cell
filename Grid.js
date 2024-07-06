@@ -9,7 +9,7 @@ class Grid {
     constructor(objects) {
         this.objects = objects;
     }
-    refreshGrid() {
+    reset() {
         for(let [index,object] of this.objects.entries()) {
             if(this._grid[object._prevm][object._prevn] === object.pattern)
                 this._grid[object._prevm][object._prevn] = '🟩';
@@ -18,7 +18,7 @@ class Grid {
         }
         // console.log(this.currentPositions[0], this.currentPositions[1]);
     }
-    displayGrid() {
+    display() {
 
         console.log(`
             ${this._grid[0][0]}   ${this._grid[0][1]}   ${this._grid[0][2]}
