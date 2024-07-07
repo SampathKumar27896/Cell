@@ -1,31 +1,34 @@
 class Grid {
-    _object = null;
-    _grid = [
-        ['🟩', '🟩', '🟩'],
-        ['🟩', '🟩', '🟩'],
-        ['🟩', '🟩', '🟩']
-    ];
-    currentPositions = [];
-    constructor(objects) {
-        this.objects = objects;
+    _objects = [];
+    _pattern = '🟩';
+    _size = 0;
+    _grid = [];
+    constructor(size, objects) {
+        this._size = size;
+        this._objects = objects;
     }
     reset() {
-        for(let [index,object] of this.objects.entries()) {
+        for(let [index,object] of this._objects.entries()) {
             if(this._grid[object._prevm][object._prevn] === object.pattern)
                 this._grid[object._prevm][object._prevn] = '🟩';
             this._grid[object.m][object.n] = object.pattern;
-            this.currentPositions[index] = `${object.m}${object.n}`;
         }
-        // console.log(this.currentPositions[0], this.currentPositions[1]);
     }
     display() {
-
-        console.log(`
-            ${this._grid[0][0]}   ${this._grid[0][1]}   ${this._grid[0][2]}
-            ${this._grid[1][0]}   ${this._grid[1][1]}   ${this._grid[1][2]}
-            ${this._grid[2][0]}   ${this._grid[2][1]}   ${this._grid[2][2]}
-        `);
-        
+        let outputString = ``;
+        for(let i = 0; i < this._size; i++) {
+            for(let j = 0; j < this._size; j++) {
+                outputString = outputString.concat(`${this._grid[i][j]}`);
+            }
+            outputString = outputString.concat(`\n`);
+        }
+        console.log(outputString);
+    }
+    init() {
+        for(let i = 0; i < this._size; i++) {
+                const array = new Array(this._size).fill(`${this._pattern}`, 0, this._size)
+                this._grid.push(array);
+        }
     }
     getTotalArea() {
         return this._grid.length;
