@@ -25,6 +25,7 @@ class Game {
         `);
         this.rabbit.makeRandomMove();
         this.carrot.makeRandomMove();
+        this.field.init();
         this.refreshField();
     }
     load(rawInput) {

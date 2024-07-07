@@ -1,8 +1,10 @@
 class Position {
     _m = 0;
     _n = 0;
-    _size = 3;
-    constructor() {}
+    _limit = 3;
+    constructor(limit) {
+        this._limit = limit;
+    }
     set position(position) {
         this._position = position;
     }
@@ -12,26 +14,26 @@ class Position {
     }
 
     incrementNbyOne() {
-        let newPosition = (++this._n)% 3;
+        let newPosition = (++this._n)% this._limit;
         this._n = newPosition;
     }
 
     incrementMbyOne() {
-        let newPosition = (++this._m)% 3;
+        let newPosition = (++this._m)% this._limit;
         this._m = newPosition;
     }
 
     decrementNbyOne() {
         let newPosition = (--this._n);
         if(newPosition < 0)
-            newPosition = 2;
+            newPosition = (this._limit - 1);
         this._n = newPosition;
     }
     
     decrementMbyOne() {
         let newPosition = (--this._m);
         if(newPosition < 0)
-            newPosition = 2;
+            newPosition = (this._limit - 1);
         this._m = newPosition;
     }
 }
