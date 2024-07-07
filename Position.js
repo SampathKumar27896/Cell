@@ -5,14 +5,21 @@ class Position {
     constructor(limit) {
         this._limit = limit;
     }
-    set position(position) {
-        this._position = position;
+    set m(postion) {
+        this._m = position;
     }
 
-    get position() {
-        return this._position;
+    set n(postion) {
+        this._n = position;
     }
 
+    get m() {
+        return this._m;
+    }
+
+    get n() {
+        return this._n;
+    }
     incrementNbyOne() {
         let newPosition = (++this._n)% this._limit;
         this._n = newPosition;
@@ -35,6 +42,11 @@ class Position {
         if(newPosition < 0)
             newPosition = (this._limit - 1);
         this._m = newPosition;
+    }
+
+    setRandomPosition() {
+        this._m = (Math.floor(Math.random() * this._limit));
+        this._n = (Math.floor(Math.random() * this._limit));
     }
 }
 

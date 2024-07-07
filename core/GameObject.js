@@ -3,7 +3,7 @@ class GameObject {
     _prevm = 0;
     _prevn = 0;
     position = 0;
-    _moves = ['moveRight','moveDown', 'moveLeft', 'moveUp'];
+    
     constructor(
         position,
         pattern
@@ -17,7 +17,7 @@ class GameObject {
     }
 
     set m(m) {
-        return this.position._m = m;
+        this.position._m = m;
     }
 
     get n() {
@@ -25,7 +25,7 @@ class GameObject {
     }
     
     set n(n) {
-        return this.position._n = n;
+        this.position._n = n;
     }
 
     get prevm() {
@@ -36,32 +36,16 @@ class GameObject {
         return this._prevn;
     }
 
+    set pattern(pattern) {
+        this._pattern = pattern;
+    }
+
     get pattern() {
         return this._pattern;
     }
 
-    makeAMove(move) {
-        this._prevm = this.position._m;
-        this._prevn = this.position._n
-        switch(move) {
-            case 'moveRight':
-                this.position.incrementNbyOne();
-                break;
-            case 'moveDown':
-                this.position.incrementMbyOne();
-                break;
-            case 'moveLeft':
-                this.position.decrementNbyOne();
-                break;
-            case 'moveUp':
-                this.position.decrementMbyOne();
-                break;
-            default:
-        }
-    }
-    makeRandomMove() {
-        let move = this._moves[Math.floor(Math.random()*this._moves.length)];
-        this.makeAMove(move);
+    spawnRandom() {
+        this.position.setRandomPosition();
     }
 }
 
