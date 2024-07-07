@@ -20,6 +20,7 @@ class Game {
             'w' to move up
             'd' to move right
             's' to move down
+            'c' to quite game
             to chase the carrots in the field
         `);
         this.rabbit.makeRandomMove();
