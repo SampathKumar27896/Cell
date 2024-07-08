@@ -2,19 +2,19 @@ class UserInput {
      _input = '';
      _endOfInputCharacter = 'c';
      keyToMove = new Map([
-        ['d', 'moveRight'],
-        ['w', 'moveUp'],
-        ['a', 'moveLeft'],
-        ['s', 'moveDown'],
+        ['\x1B[C', 'moveRight'],
+        ['\x1B[A', 'moveUp'],
+        ['\x1B[B', 'moveDown'],
+        ['\x1B[D', 'moveLeft'],
     ]);
     
     set input(input) {
         switch(input) {
-            case 'd':
-            case 's':
-            case 'a':
+            case '\x1B[A':
+            case '\x1B[D':
+            case '\x1B[B':
             case 'c':
-            case 'w':
+            case '\x1B[C':
                 this._input = input;
             break;
             default:

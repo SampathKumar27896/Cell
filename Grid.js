@@ -1,6 +1,6 @@
 class Grid {
     _objects = [];
-    _pattern = '🟩';
+    _pattern = '⬛​';
     _size = 0;
     _grid = [];
     constructor(size, objects) {
@@ -10,17 +10,17 @@ class Grid {
     reset() {
         for(let [index,object] of this._objects.entries()) {
             if(this._grid[object._prevm][object._prevn] === object.pattern)
-                this._grid[object._prevm][object._prevn] = '🟩';
+                this._grid[object._prevm][object._prevn] = this._pattern;
             this._grid[object.m][object.n] = object.pattern;
         }
     }
     display() {
-        let outputString = ``;
+        let outputString = `                                             `;
         for(let i = 0; i < this._size; i++) {
             for(let j = 0; j < this._size; j++) {
                 outputString = outputString.concat(`${this._grid[i][j]}`);
             }
-            outputString = outputString.concat(`\n`);
+            outputString = outputString.concat(`\n                                             `);
         }
         console.log(outputString);
     }

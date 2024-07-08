@@ -15,16 +15,11 @@ class Game {
     start() {
         console.log(`
             Welcome to the Game. You are a hungry rabbit chasing carrots!.
-            Press:
-            'a' to move left
-            'w' to move up
-            'd' to move right
-            's' to move down
-            'c' to quite game
+            Press: Directional Keys to navigate
             to chase the carrots in the field
         `);
-        this.rabbit.makeRandomMove();
-        this.carrot.makeRandomMove();
+        this.rabbit.spawnRandom();
+        this.carrot.spawnRandom();
         this.field.init();
         this.refreshField();
     }
@@ -39,10 +34,13 @@ class Game {
         this.rabbit.makeAMove(direction);
         if(this.isRabbitSameAsCarrot()) {
             this.score++;
-            this.carrot.makeRandomMove();
+            if(this.score === 2)
+                this.rabbit._pattern = '🐰​';
+            this.carrot.spawnRandom();
         }
         this.refreshField();
         console.log(`=======================\nScore 🥕: ${this.score}, Enter your input.`);
+        
     }
     endGame() {
         console.log(`That was a great chase, You have ${this.score} 🥕`);
