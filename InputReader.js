@@ -1,7 +1,5 @@
 const readline = require('node:readline');
-const { stdin: input, stdout: output } = require('node:process');
-
-
+const { stdin: input } = require('node:process');
 
 class InputReader {
     _endOfInput = false;
@@ -11,11 +9,11 @@ class InputReader {
         readline.emitKeypressEvents(input);
     }
     listenInput(game) {
-        // let interval = this._interval;
         if (process.stdin.isTTY)
             process.stdin.setRawMode(true);
+        
         process.stdin.on('keypress', (chunk, key) => {
-            game.load(key.sequence);
+            game.main(key.sequence);
         });
     }
 
@@ -25,7 +23,6 @@ class InputReader {
     close() {
         clearInterval(this._interval);
         process.exit();
-       
     }
 
 }

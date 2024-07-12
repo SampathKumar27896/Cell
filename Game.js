@@ -1,59 +1,18 @@
 class Game {
-    inputReader = null;
-    userInput = null;
-    rabbit = null;
-    carrot = null;
-    score = 0;
-    _interval = null;
-    constructor(inputReader, userInput, object, target, grid) {
-        this.keyboard = inputReader;
+    constructor(body, userInput, grid, inputReader) {
+        this.body = body;
         this.userInput = userInput;
-        this.rabbit = object;
-        this.carrot = target;
-        this.field = grid;
+        this.grid = grid;
+        this.inputReader = inputReader;
     }
-    start() {
-        console.log(`
-            Welcome to the Game. You are a hungry rabbit chasing carrots!.
-            Press: Directional Keys to navigate
-            to chase the carrots in the field
-        `);
-        this.rabbit.spawnRandom();
-        this.carrot.spawnRandom();
-        this.field.init();
-        this.refreshField();
-    }
-    load(rawInput) {
-        this.userInput.input = rawInput;
+    main(input) {
+        this.userInput.input = input;
         if(this.userInput.isEndOfInput()) {
-            this.endGame();
-            return;
+            this.inputReader.close();
         }
-        console.log(`=======================\n`);
-        let direction = this.userInput.getDirection(this.userInput.input);
-        this.rabbit.makeAMove(direction);
-        if(this.isRabbitSameAsCarrot()) {
-            this.score++;
-            if(this.score === 2)
-                this.rabbit._pattern = '🐰​';
-            this.carrot.spawnRandom();
-        }
-        this.refreshField();
-        console.log(`=======================\nScore 🥕: ${this.score}, Enter your input.`);
-        
-    }
-    endGame() {
-        console.log(`That was a great chase, You have ${this.score} 🥕`);
-        this.keyboard.close();
-    }
-
-    isRabbitSameAsCarrot() {
-        return this.rabbit.m === this.carrot.m && this.rabbit.n === this.carrot.n;
-    }
-
-    refreshField() {
-        this.field.reset();
-        this.field.display();
+        this.body.move(this.body.head, this.userInput.getDirection());
+        this.grid.update(this.body.head);
+        this.grid.display();
     }
 }
 

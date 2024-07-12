@@ -7,12 +7,18 @@ class Grid {
         this._size = size;
         this._objects = objects;
     }
-    reset() {
-        for(let [index,object] of this._objects.entries()) {
-            if(this._grid[object._prevm][object._prevn] === object.pattern)
-                this._grid[object._prevm][object._prevn] = this._pattern;
-            this._grid[object.m][object.n] = object.pattern;
+    update(body) {
+        let temp = body;
+        while(temp !== null) {
+            //this._grid[temp.prevX][temp.prevY] = this._pattern;
+            this._grid[temp.currX][temp.currY] = temp.pattern;
+            
+            if(temp.next === null)
+                this._grid[temp.prevX][temp.prevY] = this._pattern;
+
+            temp = temp.next;
         }
+        
     }
     display() {
         let outputString = `                                             `;
@@ -30,8 +36,8 @@ class Grid {
                 this._grid.push(array);
         }
     }
-    getTotalArea() {
-        return this._grid.length;
+    getSize() {
+        return this._size;
     }
 }
 
