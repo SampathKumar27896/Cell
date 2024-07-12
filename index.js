@@ -9,13 +9,16 @@ const Grid = require('./Grid');
 const size = 10;
 const objectPosition = new Position(size);
 const targetPosition = new Position(size);
+const targetPosition2 = new Position(size);
 const inputReader = new InputReader();
 const userInput = new UserInput();
 const cell = new MotionObject(objectPosition, '🐇');
 const target = new IdleObject(targetPosition, '🥕');
-const grid = new Grid(size, [target, cell]);
+const target2 = new IdleObject(targetPosition2, '🍒');
+const targets = [target, target2];
+const grid = new Grid(size,[]);
 const Game = require('./Game');
-const game = new Game(inputReader, userInput, cell, target, grid);
+const game = new Game(inputReader, userInput, cell, targets, grid);
 game.start();
 inputReader.listenInput(game);
 

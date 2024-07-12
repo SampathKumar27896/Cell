@@ -5,11 +5,11 @@ class Game {
     carrot = null;
     score = 0;
     _interval = null;
-    constructor(inputReader, userInput, object, target, grid) {
+    constructor(inputReader, userInput, object, targets, grid) {
         this.keyboard = inputReader;
         this.userInput = userInput;
         this.rabbit = object;
-        this.carrot = target;
+        this.carrot = targets;
         this.field = grid;
     }
     start() {
@@ -18,13 +18,18 @@ class Game {
             Press: Directional Keys to navigate
             to chase the carrots in the field
         `);
-        this.rabbit.spawnRandom();
-        this.carrot.spawnRandom();
+        this.spawnRandom(this.rabbit);
+        for(let target of this.carrot) {
+            this.spawnRandom(target);
+        }
         this.field.init();
         this.refreshField();
+        this.field.clearObjects();
     }
     load(rawInput) {
+        console.log("Input received--------------")
         this.userInput.input = rawInput;
+        this.field.clearObjects();
         if(this.userInput.isEndOfInput()) {
             this.endGame();
             return;
@@ -32,11 +37,11 @@ class Game {
         console.log(`=======================\n`);
         let direction = this.userInput.getDirection(this.userInput.input);
         this.rabbit.makeAMove(direction);
-        if(this.isRabbitSameAsCarrot()) {
+        this.field._objects = [...this.field._objects, this.rabbit];
+        const isObject = this.isRabbitSameAsCarrot();
+        if(isObject) {
             this.score++;
-            if(this.score === 2)
-                this.rabbit._pattern = '🐰​';
-            this.carrot.spawnRandom();
+            this.spawnRandom(isObject);
         }
         this.refreshField();
         console.log(`=======================\nScore 🥕: ${this.score}, Enter your input.`);
@@ -48,12 +53,23 @@ class Game {
     }
 
     isRabbitSameAsCarrot() {
-        return this.rabbit.m === this.carrot.m && this.rabbit.n === this.carrot.n;
+        for(let object of this.carrot) {
+            if(this.rabbit.m === object.m && this.rabbit.n === object.n)
+                return object;
+        }
+        return false;
     }
 
     refreshField() {
         this.field.reset();
         this.field.display();
+    }
+
+    spawnRandom(object) {
+       
+        console.log(object)
+        object.spawnRandom();
+        this.field._objects = [...this.field._objects, object];
     }
 }
 

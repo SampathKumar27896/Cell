@@ -7,6 +7,15 @@ class Grid {
         this._size = size;
         this._objects = objects;
     }
+    set objects(objects) {
+        this.objects = objects;
+    }
+    get objects() {
+        return this.objects;
+    }
+    clearObjects() {
+        this._objects = [];
+    }
     reset() {
         for(let [index,object] of this._objects.entries()) {
             if(this._grid[object._prevm][object._prevn] === object.pattern)
