@@ -5,7 +5,9 @@ class Cell {
     currY = 1;
     next = null;
     pattern = '🟧';
-
+    constructor(pattern) {
+        this.pattern = pattern
+    }
 }
 
 class Body {
@@ -16,8 +18,7 @@ class Body {
         this.limit = limit;
     }
 
-    addCell() {
-        const cell = new Cell();
+    addCell(cell) {
         if(this.head === null) {
             cell.currX = 1;
             cell.currY = 1;
@@ -27,8 +28,8 @@ class Body {
             while(temp.next !== null) {
                 temp = temp.next;
             }
-            cell.currX = temp.currX;
-            cell.currY = temp.currY + 1;
+            cell.currX = this.head.currX;
+            cell.currY = this.head.currY;
             temp.next = cell;
         }
         
@@ -63,6 +64,14 @@ class Body {
             temp.next.currY = temp.prevY;
             temp = temp.next;
         }
+    }
+    setRandomPosition(head) {
+        let temp = head;
+        temp.prevX = temp.currX;
+        temp.prevY = temp.currY;
+        temp.currX = Math.floor(Math.random() * (this.limit - 0) + 0);
+        temp.currY = Math.floor(Math.random() * (this.limit - 0) + 0);
+        return head;
     }
 }
 module.exports = {

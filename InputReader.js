@@ -11,9 +11,13 @@ class InputReader {
     listenInput(game) {
         if (process.stdin.isTTY)
             process.stdin.setRawMode(true);
-        
+        const program = game.main.bind(game);
+        setInterval(() => {
+            program();
+        }, 1000)
         process.stdin.on('keypress', (chunk, key) => {
-            game.main(key.sequence);
+            console.log(key.sequence);
+            game.currInput = key.sequence;
         });
     }
 

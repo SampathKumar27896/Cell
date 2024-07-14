@@ -39,6 +39,7 @@ class Grid {
     getSize() {
         return this._size;
     }
+    
 }
 
 module.exports = Grid;

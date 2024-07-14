@@ -8,14 +8,17 @@ const inputReader = new InputReader();
 const userInput = new UserInput();
 
 const grid = new Grid(10,[]);
-const bodyLength = 6;
+const bodyLength = 2;
 const body = new Body(null, grid.getSize());
 for(let i = 0; i < bodyLength; i++) {
-    body.addCell();
+    body.addCell(new Cell('🟧'));
 }
+const food = new Cell('🟦');
+const foodBody = new Body(food, grid.getSize());
 grid.init();
-console.log(body.head)
+
 grid.update(body.head);
+grid.update(foodBody.head);
 grid.display();
-const game = new Game(body, userInput, grid, inputReader);
+const game = new Game(body, foodBody, userInput, grid, inputReader);
 inputReader.listenInput(game);
