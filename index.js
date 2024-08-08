@@ -7,8 +7,8 @@ const Game = require('./Game');
 const inputReader = new InputReader();
 const userInput = new UserInput();
 
-const grid = new Grid(25,[]);
-const bodyLength = 5;
+const grid = new Grid(10,[]);
+const bodyLength = 2;
 const body = new Body(null, grid.getSize());
 for(let i = 0; i < bodyLength; i++) {
     body.addCell(new Cell('🟧'));
