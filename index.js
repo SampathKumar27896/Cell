@@ -1,33 +1,24 @@
-
+const Grid = require('./Grid');
+const {Cell, Body} = require('./core/core');
 const InputReader = require('./InputReader');
 const UserInput = require('./UserInput');
-const Position = require('./Position');
-const MotionObject = require('./core/MotionObject');
-const IdleObject = require('./core/IdleObject');
-const Grid = require('./Grid');
-
-const size = 10;
-const objectPosition = new Position(size);
-const targetPosition = new Position(size);
+const Game = require('./Game');
+//body, userInput, grid, inputReader
 const inputReader = new InputReader();
 const userInput = new UserInput();
-const cell = new MotionObject(objectPosition, '🐇');
-const target = new IdleObject(targetPosition, '🥕');
-const grid = new Grid(size, [target, cell]);
-const Game = require('./Game');
-const game = new Game(inputReader, userInput, cell, target, grid);
-game.start();
+
+const grid = new Grid(10,[]);
+const bodyLength = 2;
+const body = new Body(null, grid.getSize());
+for(let i = 0; i < bodyLength; i++) {
+    body.addCell(new Cell('🟧'));
+}
+const food = new Cell('🟦');
+const foodBody = new Body(food, grid.getSize());
+foodBody.setRandomPosition(foodBody.head)
+grid.init();
+grid.update(body.head);
+grid.update(foodBody.head);
+grid.display();
+const game = new Game(body, foodBody, userInput, grid, inputReader);
 inputReader.listenInput(game);
-
-
-
-
-
-
-
-/**
- * O  O  O
- * O  O  O
- * O  O  O
- */
-

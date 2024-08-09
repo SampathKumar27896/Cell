@@ -2,10 +2,10 @@ class UserInput {
      _input = '';
      _endOfInputCharacter = 'c';
      keyToMove = new Map([
-        ['\x1B[C', 'moveRight'],
-        ['\x1B[A', 'moveUp'],
-        ['\x1B[B', 'moveDown'],
-        ['\x1B[D', 'moveLeft'],
+        ['\x1B[C', 'right'],
+        ['\x1B[A', 'up'],
+        ['\x1B[B', 'down'],
+        ['\x1B[D', 'left'],
     ]);
     
     set input(input) {
