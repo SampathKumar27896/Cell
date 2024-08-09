@@ -15,8 +15,8 @@ for(let i = 0; i < bodyLength; i++) {
 }
 const food = new Cell('🟦');
 const foodBody = new Body(food, grid.getSize());
+foodBody.setRandomPosition(foodBody.head)
 grid.init();
-
 grid.update(body.head);
 grid.update(foodBody.head);
 grid.display();
