@@ -52,6 +52,8 @@ class Body {
                 temp.currY = (temp.currY + 1) % this.limit;
                 break;
             default:
+                temp.currY = (temp.currY + 1) % this.limit;
+
         }
         this.moveBody(temp);
         return head;
