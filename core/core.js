@@ -28,8 +28,8 @@ class Body {
             while(temp.next !== null) {
                 temp = temp.next;
             }
-            cell.currX = this.head.currX;
-            cell.currY = this.head.currY;
+            cell.currX = temp.prevX;
+            cell.currY = temp.prevY;
             temp.next = cell;
         }
         
