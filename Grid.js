@@ -10,12 +10,9 @@ class Grid {
     update(body) {
         let temp = body;
         while(temp !== null) {
-            //this._grid[temp.prevX][temp.prevY] = this._pattern;
             this._grid[temp.currX][temp.currY] = temp.pattern;
-            
             if(temp.next === null)
                 this._grid[temp.prevX][temp.prevY] = this._pattern;
-
             temp = temp.next;
         }
         
